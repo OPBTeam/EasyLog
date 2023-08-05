@@ -1,5 +1,5 @@
 # EasyLog
-A Pocketmine Library for easy logging.
+A Pocketmine Library create separate logs for plugins
 
 # Usage
 ```php
