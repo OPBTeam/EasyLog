@@ -35,3 +35,29 @@ $logger->logSub("sub1", "Test log 1", LogLevel::DEBUG); // [10:51:45 2023/08/05]
 $logger->logSub("sub2", "Test log 2", LogLevel::DEBUG); // [10:51:45 2023/08/05] | DEBUG] Test log 2
 ```
 This log will be saved in `server\plugin_logs\PluginName\sub1\Y-m-d.log` and `server\plugin_logs\PluginName\sub2\Y-m-d.log`
+
+## Simple Trait
+```php
+trait LoggerTrait {
+
+    private static EasyLog $log;
+
+    public static function initLogger(): void{
+        $log = new EasyLog();
+        $log->init("PluginName");
+        self::$log = $log;
+    }
+
+    public static function log(string $message, LogLevel $level = LogLevel::INFO) :void{
+        self::$log->log($message, $level);
+    }
+
+    public static function logSub(string $sub, string $message, LogLevel $level = LogLevel::INFO) :void{
+        self::$log->logSub($sub, $message, $level);
+    }
+
+    public static function getLogger() : EasyLog {
+        return self::$log;
+    }
+}
+```
